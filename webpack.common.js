@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 const config = {
-    entry: './index.js',
+    entry: './client/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index.js',
@@ -52,13 +52,13 @@ const config = {
     },
     devtool: 'source-map',
     devServer: {
-        contentBase: path.join(__dirname),
+        contentBase: path.join(__dirname, 'client'),
         historyApiFallback: true,
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new CopyWebpackPlugin([
-            { from: 'index.html' },
+            { from: './client/index.html' },
         ]),
     ],
 };
