@@ -1,50 +1,81 @@
 <template>
 
-    <div id="register">
-        <div class="container">
+    <div class="container">
 
-            <h1>Register</h1>
+        <h1>Register</h1>
 
-            <br>
+        <br>
 
-            <form action="">
+        <form v-on:submit.prevent="register">
 
-                <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input type="text" class="form-control" name="first_name" placeholder="First Name">
-                </div>
+            <FormInput
+                label="First Name"
+                type="text"
+                placeholder="First Name"
+                v-model="first_name"
+            />
 
-                <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" placeholder="Last Name">
-                </div>
+            <FormInput
+                label="Last Name"
+                type="text"
+                placeholder="Last Name"
+                v-model="last_name"
+            />
 
-                <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Email">
-                </div>
+            <FormInput
+                label="Email"
+                type="email"
+                placeholder="Email"
+                v-model="email"
+            />
 
-                <div class="form-group">
-                    <label class="control-label">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
-                </div>
+            <FormInput
+                label="Password"
+                type="password"
+                placeholder="Password"
+                v-model="password"
+            />
 
-                <div class="form-group">
-                    <label class="control-label">Confirm Password</label>
-                    <input type="password" class="form-control" name="confirmation" placeholder="Confirm Password">
-                </div>
+            <FormInput
+                label="Confirm Password"
+                type="password"
+                placeholder="Confirm Password"
+                v-model="confirmation"
+            />
 
-                <button class="btn btn-default">Submit</button>
+            <button class="btn btn-default">Submit</button>
 
-            </form>
+        </form>
 
-        </div>
     </div>
 
 </template>
 
 
 <script>
+    import FormInput from './FormInput'
+    import createUser from '../api/register'
+
+    export default {
+        components: {
+            'FormInput': FormInput,
+        },
+        data: function() {
+            return {
+                first_name: '',
+                last_name: '',
+                email: '',
+                password: '',
+                confirmation: '',
+            }
+        },
+        methods: {
+            register: function() {
+                console.log(this.$data)
+                createUser(this.$data)
+            }
+        },
+    }
 </script>
 
 

@@ -1,6 +1,7 @@
 // vue
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
 
 // components
 import App from './App.vue';
@@ -10,6 +11,7 @@ import routes from './routes';
 
 // plugins
 Vue.use(VueRouter);
+Vue.use(VueResource);
 
 const router = new VueRouter({
     routes,

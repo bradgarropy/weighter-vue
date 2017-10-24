@@ -1,35 +1,55 @@
 <template>
 
-    <div id="login">
-        <div class="container">
+    <div class="container">
 
-            <h1>Login</h1>
+        <h1>Login</h1>
 
-            <br>
+        <br>
 
-            <form action="">
+        <form v-on:submit.prevent="login">
 
-                <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="email" class="form-control" name="email" placeholder="Email">
-                </div>
+            <FormInput
+                label="Email"
+                type="email"
+                placeholder="Email"
+                v-model="email"
+            />
 
-                <div class="form-group">
-                    <label class="control-label">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password">
-                </div>
+            <FormInput
+                label="Password"
+                type="password"
+                placeholder="Password"
+                v-model="password"
+            />
 
-                <button class="btn btn-default">Submit</button>
+            <button class="btn btn-default">Submit</button>
 
-            </form>
+        </form>
 
-        </div>
     </div>
 
 </template>
 
 
 <script>
+    import FormInput from './FormInput'
+
+    export default {
+        components: {
+            'FormInput': FormInput,
+        },
+        data: function() {
+            return {
+                email: '',
+                password: '',
+            }
+        },
+        methods: {
+            login: function() {
+                console.log(this.$data);
+            },
+        },
+    }
 </script>
 
 
