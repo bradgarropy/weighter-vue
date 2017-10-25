@@ -13,6 +13,7 @@
                 type="text"
                 placeholder="First Name"
                 v-model="first_name"
+                v-bind:error="errors.first_name"
             />
 
             <FormInput
@@ -20,6 +21,7 @@
                 type="text"
                 placeholder="Last Name"
                 v-model="last_name"
+                v-bind:error="errors.last_name"
             />
 
             <FormInput
@@ -27,6 +29,7 @@
                 type="email"
                 placeholder="Email"
                 v-model="email"
+                v-bind:error="errors.email"
             />
 
             <FormInput
@@ -34,6 +37,7 @@
                 type="password"
                 placeholder="Password"
                 v-model="password"
+                v-bind:error="errors.password"
             />
 
             <FormInput
@@ -41,6 +45,7 @@
                 type="password"
                 placeholder="Confirm Password"
                 v-model="confirmation"
+                v-bind:error="errors.confirmation"
             />
 
             <button class="btn btn-default">Submit</button>
@@ -67,13 +72,25 @@
                 email: '',
                 password: '',
                 confirmation: '',
+                errors: {},
             }
         },
         methods: {
             register: function() {
-                console.log(this.$data)
                 createUser(this.$data)
-            }
+                    .then((response) => {
+
+                        console.log(response);
+                        this.$router.push('/');
+
+                    })
+                    .catch((response) => {
+
+                        const errors = response.body.errors;
+                        this.errors = errors
+
+                    });
+            },
         },
     }
 </script>
