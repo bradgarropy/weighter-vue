@@ -59,7 +59,7 @@
 
 <script>
     import FormInput from './FormInput'
-    import createUser from '../api/register'
+    import createUser from '../api/user'
 
     export default {
         components: {
@@ -80,13 +80,13 @@
                 createUser(this.$data)
                     .then((response) => {
 
-                        console.log(response);
-                        this.$router.push('/');
+                        console.log(response)
+                        this.$router.push('/')
 
                     })
                     .catch((response) => {
 
-                        const errors = response.body.errors;
+                        const errors = response.body.errors
                         this.errors = errors
 
                     });

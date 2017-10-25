@@ -13,6 +13,7 @@
                 type="email"
                 placeholder="Email"
                 v-model="email"
+                v-bind:error="errors.email"
             />
 
             <FormInput
@@ -20,6 +21,7 @@
                 type="password"
                 placeholder="Password"
                 v-model="password"
+                v-bind:error="errors.password"
             />
 
             <button class="btn btn-default">Submit</button>
@@ -33,6 +35,8 @@
 
 <script>
     import FormInput from './FormInput'
+    import login from '../api/login'
+    import Vue from 'vue'
 
     export default {
         components: {
@@ -42,11 +46,28 @@
             return {
                 email: '',
                 password: '',
+                errors: {},
             }
         },
         methods: {
             login: function() {
-                console.log(this.$data);
+                login(this.$data)
+                    .then((response) => {
+
+                        console.log(response)
+                        const token = response.data.token;
+
+                        localStorage.setItem('token', token);
+                        Vue.http.headers.common.Authorization = `Bearer ${token}`;
+                        this.$router.push('/')
+
+                    })
+                    .catch((response) => {
+
+                        const errors = response.body.errors
+                        this.errors = errors
+
+                    });
             },
         },
     }

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="form-group">
+    <div class="form-group" v-bind:class="{'has-error': error}">
 
         <label class="control-label">
             {{label}}
