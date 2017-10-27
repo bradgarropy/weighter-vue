@@ -34,43 +34,48 @@
 
 
 <script>
-    import FormInput from './FormInput'
-    import login from '../api/login'
-    import Vue from 'vue'
+    import Vue from 'vue';
+    import FormInput from './FormInput.vue';
+    import login from '../api/login';
+    import { bus } from '../index';
 
     export default {
         components: {
-            'FormInput': FormInput,
+            FormInput,
         },
-        data: function() {
+        data() {
+
             return {
                 email: '',
                 password: '',
                 errors: {},
-            }
+            };
+
         },
         methods: {
-            login: function() {
+            login() {
+
                 login(this.$data)
                     .then((response) => {
 
-                        console.log(response)
-                        const token = response.data.token;
+                        const { token } = response.data;
 
                         localStorage.setItem('token', token);
                         Vue.http.headers.common.Authorization = `Bearer ${token}`;
-                        this.$router.push('/')
+                        bus.$emit('login');
+                        this.$router.push('/');
 
                     })
                     .catch((response) => {
 
-                        const errors = response.body.errors
-                        this.errors = errors
+                        const { errors } = response.body;
+                        this.errors = errors;
 
                     });
+
             },
         },
-    }
+    };
 </script>
 
 

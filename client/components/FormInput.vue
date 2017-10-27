@@ -43,14 +43,16 @@
             error: {
                 type: Object,
                 required: false,
-            }
-        },
-        methods: {
-            onInput: function(value) {
-                this.$emit('input', value)
             },
         },
-    }
+        methods: {
+            onInput(value) {
+
+                this.$emit('input', value);
+
+            },
+        },
+    };
 </script>
 
 

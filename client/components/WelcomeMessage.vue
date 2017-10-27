@@ -19,16 +19,36 @@
 
 
 <script>
-    import { isAuthenticated, userFirstName } from '../utils/authentication'
+    import { bus } from '../index';
+    import { isAuthenticated, userFirstName } from '../utils/authentication';
 
     export default {
-        data: function() {
+        data() {
+
             return {
                 authenticated: isAuthenticated(),
                 name: userFirstName(),
-            }
-        }
-    }
+            };
+
+        },
+        created() {
+
+            bus.$on('login', () => {
+
+                this.authenticated = isAuthenticated();
+                this.name = userFirstName();
+
+            });
+
+            bus.$on('logout', () => {
+
+                this.authenticated = isAuthenticated();
+                this.name = userFirstName();
+
+            });
+
+        },
+    };
 </script>
 
 

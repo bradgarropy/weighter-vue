@@ -18,7 +18,11 @@ const router = new VueRouter({
     mode: 'history',
 });
 
-const app = new Vue({
+// event bus
+export const bus = new Vue();
+
+// application
+export const app = new Vue({
     el: '#app',
     router,
     template: '<App/>',

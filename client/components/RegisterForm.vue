@@ -58,14 +58,15 @@
 
 
 <script>
-    import FormInput from './FormInput'
-    import createUser from '../api/user'
+    import FormInput from './FormInput.vue';
+    import createUser from '../api/user';
 
     export default {
         components: {
-            'FormInput': FormInput,
+            FormInput,
         },
-        data: function() {
+        data() {
+
             return {
                 first_name: '',
                 last_name: '',
@@ -73,26 +74,28 @@
                 password: '',
                 confirmation: '',
                 errors: {},
-            }
+            };
+
         },
         methods: {
-            register: function() {
-                createUser(this.$data)
-                    .then((response) => {
+            register() {
 
-                        console.log(response)
-                        this.$router.push('/')
+                createUser(this.$data)
+                    .then(() => {
+
+                        this.$router.push('/');
 
                     })
                     .catch((response) => {
 
-                        const errors = response.body.errors
-                        this.errors = errors
+                        const { errors } = response.body;
+                        this.errors = errors;
 
                     });
+
             },
         },
-    }
+    };
 </script>
 
 

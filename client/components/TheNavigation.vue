@@ -40,7 +40,7 @@
                                     <router-link to="/profile">Profile</router-link>
                                 </li>
                                 <li>
-                                    <a role="button" tabIndex="0" onClick={this.handleLogout}>Logout</a>
+                                    <a role="button" tabIndex="0" v-on:click="logout">Logout</a>
                                 </li>
                             </ul>
                         </li>
@@ -57,16 +57,47 @@
 
 
 <script>
-    import { isAuthenticated, userFirstName } from '../utils/authentication'
+    import Vue from 'vue';
+    import { bus } from '../index';
+    import { isAuthenticated, userFirstName } from '../utils/authentication';
 
     export default {
-        data: function() {
+        created() {
+
+            bus.$on('login', () => {
+
+                this.authenticated = isAuthenticated();
+                this.name = userFirstName();
+
+            });
+
+            bus.$on('logout', () => {
+
+                this.authenticated = isAuthenticated();
+                this.name = userFirstName();
+
+            });
+
+        },
+        data() {
+
             return {
                 authenticated: isAuthenticated(),
                 name: userFirstName(),
-            }
+            };
+
         },
-    }
+        methods: {
+            logout() {
+
+                localStorage.removeItem('token');
+                delete Vue.http.headers.common.Authorization;
+                bus.$emit('logout');
+                this.$router.push('/');
+
+            },
+        },
+    };
 </script>
 
 
