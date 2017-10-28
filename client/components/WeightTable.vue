@@ -9,7 +9,12 @@
                 <th class="text-center">Edit</th>
             </tr>
 
-            <WeightTableEntry/>
+            <template v-for="weight in weights">
+                <WeightTableEntry
+                    v-bind:date="weight.date"
+                    v-bind:weight="weight.weight"
+                    v-bind:key="weight._id"/>
+            </template>
 
         </tbody>
     </table>
@@ -30,8 +35,17 @@
                 .then((response) => {
 
                     console.log(response);
+                    const weights = response.body;
+                    this.weights = weights;
 
                 });
+
+        },
+        data() {
+
+            return {
+                weights: [],
+            };
 
         },
     };

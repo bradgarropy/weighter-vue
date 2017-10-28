@@ -2,7 +2,7 @@
     <tr>
 
         <td class="text-center">
-            {{date}}
+            {{date | formatDate}}
         </td>
 
         <td class="text-center">
@@ -26,14 +26,25 @@
 
 
 <script>
+    import moment from 'moment';
+
     export default {
-        data() {
+        props: {
+            date: {
+                type: String,
+                required: true,
+            },
+            weight: {
+                type: Number,
+                required: true,
+            },
+        },
+        filters: {
+            formatDate(date) {
 
-            return {
-                date: '',
-                weight: '',
-            };
+                return moment(date).utc().format('MM/DD/YYYY');
 
+            },
         },
     };
 </script>

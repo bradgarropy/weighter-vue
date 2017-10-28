@@ -46,6 +46,7 @@
                     .then((response) => {
 
                         console.log(response);
+                        Object.assign(this.$data, this.$options.data());
 
                     })
                     .catch((response) => {
