@@ -1,20 +1,25 @@
 // components
-import WelcomeMessage from './components/WelcomeMessage.vue';
-import RegisterForm from './components/RegisterForm.vue';
-import LoginForm from './components/LoginForm.vue';
+import Welcome from './views/Welcome.vue';
+import Register from './views/Register.vue';
+import Weight from './views/Weight.vue';
+import Login from './views/Login.vue';
 
 
 export default [
     {
         path: '/',
-        component: WelcomeMessage,
+        component: Welcome,
     },
     {
         path: '/register',
-        component: RegisterForm,
+        component: Register,
     },
     {
         path: '/login',
-        component: LoginForm,
+        component: Login,
+    },
+    {
+        path: '/weight',
+        component: Weight,
     },
 ];

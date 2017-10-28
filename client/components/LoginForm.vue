@@ -1,34 +1,26 @@
 <template>
 
-    <div class="container">
+    <form v-on:submit.prevent="login">
 
-        <h1>Login</h1>
+        <FormInput
+            label="Email"
+            type="email"
+            placeholder="Email"
+            v-model="email"
+            v-bind:error="errors.email"
+        />
 
-        <br>
+        <FormInput
+            label="Password"
+            type="password"
+            placeholder="Password"
+            v-model="password"
+            v-bind:error="errors.password"
+        />
 
-        <form v-on:submit.prevent="login">
+        <button class="btn btn-default">Submit</button>
 
-            <FormInput
-                label="Email"
-                type="email"
-                placeholder="Email"
-                v-model="email"
-                v-bind:error="errors.email"
-            />
-
-            <FormInput
-                label="Password"
-                type="password"
-                placeholder="Password"
-                v-model="password"
-                v-bind:error="errors.password"
-            />
-
-            <button class="btn btn-default">Submit</button>
-
-        </form>
-
-    </div>
+    </form>
 
 </template>
 

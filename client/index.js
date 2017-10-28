@@ -13,6 +13,7 @@ import routes from './routes';
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+// router
 const router = new VueRouter({
     routes,
     mode: 'history',
@@ -20,6 +21,15 @@ const router = new VueRouter({
 
 // event bus
 export const bus = new Vue();
+
+// http
+const token = localStorage.getItem('token');
+
+if (token) {
+
+    Vue.http.headers.common.Authorization = `Bearer ${token}`;
+
+}
 
 // application
 export const app = new Vue({

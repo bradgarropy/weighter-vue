@@ -1,58 +1,50 @@
 <template>
 
-    <div class="container">
+    <form v-on:submit.prevent="register">
 
-        <h1>Register</h1>
+        <FormInput
+            label="First Name"
+            type="text"
+            placeholder="First Name"
+            v-model="first_name"
+            v-bind:error="errors.first_name"
+        />
 
-        <br>
+        <FormInput
+            label="Last Name"
+            type="text"
+            placeholder="Last Name"
+            v-model="last_name"
+            v-bind:error="errors.last_name"
+        />
 
-        <form v-on:submit.prevent="register">
+        <FormInput
+            label="Email"
+            type="email"
+            placeholder="Email"
+            v-model="email"
+            v-bind:error="errors.email"
+        />
 
-            <FormInput
-                label="First Name"
-                type="text"
-                placeholder="First Name"
-                v-model="first_name"
-                v-bind:error="errors.first_name"
-            />
+        <FormInput
+            label="Password"
+            type="password"
+            placeholder="Password"
+            v-model="password"
+            v-bind:error="errors.password"
+        />
 
-            <FormInput
-                label="Last Name"
-                type="text"
-                placeholder="Last Name"
-                v-model="last_name"
-                v-bind:error="errors.last_name"
-            />
+        <FormInput
+            label="Confirm Password"
+            type="password"
+            placeholder="Confirm Password"
+            v-model="confirmation"
+            v-bind:error="errors.confirmation"
+        />
 
-            <FormInput
-                label="Email"
-                type="email"
-                placeholder="Email"
-                v-model="email"
-                v-bind:error="errors.email"
-            />
+        <button class="btn btn-default">Submit</button>
 
-            <FormInput
-                label="Password"
-                type="password"
-                placeholder="Password"
-                v-model="password"
-                v-bind:error="errors.password"
-            />
-
-            <FormInput
-                label="Confirm Password"
-                type="password"
-                placeholder="Confirm Password"
-                v-model="confirmation"
-                v-bind:error="errors.confirmation"
-            />
-
-            <button class="btn btn-default">Submit</button>
-
-        </form>
-
-    </div>
+    </form>
 
 </template>
 
