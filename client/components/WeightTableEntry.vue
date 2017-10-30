@@ -10,15 +10,15 @@
         </td>
 
         <td class="text-center">
-            <a href="#">
+            <a href="#" v-on:click="trash(id)">
                 <span class="glyphicon glyphicon-trash text-danger"></span>
             </a>
         </td>
 
         <td class="text-center">
-            <a href="#">
+            <router-link v-bind:to="`/edit/${id}`">
                 <span class="glyphicon glyphicon-edit text-info"></span>
-            </a>
+            </router-link>
         </td>
 
     </tr>
@@ -30,6 +30,10 @@
 
     export default {
         props: {
+            id: {
+                type: String,
+                required: true,
+            },
             date: {
                 type: String,
                 required: true,
@@ -38,11 +42,20 @@
                 type: Number,
                 required: true,
             },
+            trash: {
+                type: Function,
+                required: true,
+            },
         },
         filters: {
             formatDate(date) {
 
                 return moment(date).utc().format('MM/DD/YYYY');
+
+            },
+            editUrl(id) {
+
+                return `/edit/${id}`;
 
             },
         },

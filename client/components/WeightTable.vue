@@ -11,9 +11,11 @@
 
             <template v-for="weight in weights">
                 <WeightTableEntry
+                    v-bind:key="weight._id"
+                    v-bind:id="weight._id"
                     v-bind:date="weight.date"
                     v-bind:weight="weight.weight"
-                    v-bind:key="weight._id"/>
+                    v-bind:trash="trash"/>
             </template>
 
         </tbody>
@@ -23,7 +25,8 @@
 
 <script>
     import WeightTableEntry from './WeightTableEntry.vue';
-    import { getWeights } from '../api/weight';
+    import { getWeights, deleteWeight } from '../api/weight';
+    import { bus } from '../index';
 
     export default {
         components: {
@@ -31,14 +34,13 @@
         },
         created() {
 
-            getWeights()
-                .then((response) => {
+            this.refresh();
 
-                    console.log(response);
-                    const weights = response.body;
-                    this.weights = weights;
+            bus.$on('weightAdded', () => {
 
-                });
+                this.refresh();
+
+            });
 
         },
         data() {
@@ -47,6 +49,30 @@
                 weights: [],
             };
 
+        },
+        methods: {
+            refresh() {
+
+                getWeights()
+                    .then((response) => {
+
+                        console.log(response);
+                        const weights = response.body;
+                        this.weights = weights;
+
+                    });
+
+            },
+            trash(id) {
+
+                deleteWeight(id)
+                    .then((response) => {
+
+                        this.refresh();
+
+                    });
+
+            },
         },
     };
 </script>

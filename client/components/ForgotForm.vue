@@ -1,6 +1,6 @@
 <template>
 
-    <form v-on:submit.prevent="login">
+    <form v-on:submit.prevent="forgot">
 
         <FormInput
             label="Email"
@@ -10,19 +10,7 @@
             v-bind:error="errors.email"
         />
 
-        <FormInput
-            label="Password"
-            type="password"
-            placeholder="Password"
-            v-model="password"
-            v-bind:error="errors.password"
-        />
-
         <button class="btn btn-default">Submit</button>
-
-        <div class="pull-right">
-            <router-link to="/forgot">Forgot Password?</router-link>
-        </div>
 
     </form>
 
@@ -30,10 +18,8 @@
 
 
 <script>
-    import Vue from 'vue';
     import FormInput from './FormInput.vue';
-    import login from '../api/login';
-    import { bus } from '../index';
+    import forgot from '../api/forgot';
 
     export default {
         components: {
@@ -43,28 +29,25 @@
 
             return {
                 email: '',
-                password: '',
                 errors: {},
             };
 
         },
         methods: {
-            login() {
+            forgot() {
 
-                login(this.$data)
+                forgot(this.$data)
                     .then((response) => {
 
-                        const { token } = response.data;
-
-                        localStorage.setItem('token', token);
-                        Vue.http.headers.common.Authorization = `Bearer ${token}`;
-                        bus.$emit('login');
+                        console.log(response);
                         this.$router.push('/');
 
                     })
                     .catch((response) => {
 
                         const { errors } = response.body;
+
+                        console.log(errors);
                         this.errors = errors;
 
                     });

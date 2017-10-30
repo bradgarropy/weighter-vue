@@ -1,5 +1,5 @@
 <template>
-    <form v-on:submit.prevent="add">
+    <form v-on:submit.prevent="edit">
 
         <FormInput
             label="Date"
@@ -24,8 +24,7 @@
 <script>
     import moment from 'moment';
     import FormInput from './FormInput.vue';
-    import { createWeight } from '../api/weight';
-    import { bus } from '../index';
+    import { getWeight, updateWeight } from '../api/weight';
 
     export default {
         components: {
@@ -34,28 +33,39 @@
         data() {
 
             return {
-                date: moment().format('YYYY-MM-DD'),
+                date: '',
                 weight: '',
                 errors: {},
             };
 
         },
-        methods: {
-            add() {
+        props: {
+            id: {
+                type: String,
+                required: true,
+            },
+        },
+        created() {
 
-                createWeight(this.$data)
+            getWeight(this.id)
+                .then((response) => {
+
+                    const weight = response.data;
+
+                    this.date = moment(weight.date).utc().format('YYYY-MM-DD');
+                    this.weight = JSON.stringify(weight.weight);
+
+                });
+
+        },
+        methods: {
+            edit() {
+
+                updateWeight(this.id, this.$data)
                     .then((response) => {
 
                         console.log(response);
-                        Object.assign(this.$data, this.$options.data());
-                        bus.$emit('weightAdded');
-
-                    })
-                    .catch((response) => {
-
-                        console.log(response);
-                        const { errors } = response.body;
-                        this.errors = errors;
+                        this.$router.push('/weight');
 
                     });
 
@@ -66,5 +76,4 @@
 
 
 <style>
-
 </style>

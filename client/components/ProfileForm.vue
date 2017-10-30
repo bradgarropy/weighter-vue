@@ -1,6 +1,5 @@
 <template>
-
-    <form v-on:submit.prevent="register">
+    <form v-on:submit.prevent="edit">
 
         <FormInput
             label="First Name"
@@ -26,32 +25,20 @@
             v-bind:error="errors.email"
         />
 
-        <FormInput
-            label="Password"
-            type="password"
-            placeholder="Password"
-            v-model="password"
-            v-bind:error="errors.password"
-        />
-
-        <FormInput
-            label="Confirm Password"
-            type="password"
-            placeholder="Confirm Password"
-            v-model="confirmation"
-            v-bind:error="errors.confirmation"
-        />
-
         <button class="btn btn-default">Submit</button>
 
-    </form>
+        <div class="pull-right">
+            <router-link to="/password">Password Settings</router-link>
+        </div>
 
+    </form>
 </template>
 
 
 <script>
     import FormInput from './FormInput.vue';
-    import { createUser } from '../api/user';
+    import { getUser, updateUser } from '../api/user';
+    import { userId } from '../utils/authentication';
 
     export default {
         components: {
@@ -63,16 +50,32 @@
                 first_name: '',
                 last_name: '',
                 email: '',
-                password: '',
-                confirmation: '',
                 errors: {},
             };
 
         },
-        methods: {
-            register() {
+        created() {
 
-                createUser(this.$data)
+            const id = userId();
+
+            getUser(id)
+                .then((response) => {
+
+                    const user = response.data;
+
+                    this.first_name = user.first_name;
+                    this.last_name = user.last_name;
+                    this.email = user.email;
+
+                });
+
+        },
+        methods: {
+            edit() {
+
+                const id = userId();
+
+                updateUser(id, this.$data)
                     .then(() => {
 
                         this.$router.push('/');

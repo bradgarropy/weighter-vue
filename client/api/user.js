@@ -15,7 +15,7 @@ export function getUser(id) {
 }
 
 
-export default function createUser(data) {
+export function createUser(data) {
 
     return Vue.http.post(`${process.env.API_URL}/api/user`, data);
 

@@ -58,7 +58,7 @@ const config = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new CopyWebpackPlugin([
-            { from: './client/index.html' },
+            { from: 'client/index.html' },
         ]),
     ],
 };
