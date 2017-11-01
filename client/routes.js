@@ -7,6 +7,7 @@ import Login from './views/Login.vue';
 import Profile from './views/Profile.vue';
 import Password from './views/Password.vue';
 import Forgot from './views/Forgot.vue';
+import Reset from './views/Reset.vue';
 
 
 export default [
@@ -17,6 +18,10 @@ export default [
     {
         path: '/forgot',
         component: Forgot,
+    },
+    {
+        path: '/reset/:token',
+        component: Reset,
     },
     {
         path: '/register',
