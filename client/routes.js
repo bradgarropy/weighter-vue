@@ -8,6 +8,7 @@ import Profile from './views/Profile.vue';
 import Password from './views/Password.vue';
 import Forgot from './views/Forgot.vue';
 import Reset from './views/Reset.vue';
+import Feedback from './views/Feedback.vue';
 
 
 export default [
@@ -30,6 +31,10 @@ export default [
     {
         path: '/login',
         component: Login,
+    },
+    {
+        path: '/feedback',
+        component: Feedback,
     },
     {
         path: '/password',
