@@ -7,7 +7,9 @@
     "dev": "webpack-dev-server --open --config webpack.dev.js",
     "prod": "webpack-dev-server --open --config webpack.prod.js",
     "build-dev": "webpack --config webpack.dev.js",
-    "build-prod": "webpack --config webpack.prod.js"
+    "build-prod": "webpack --config webpack.prod.js",
+    "postinstall": "webpack --config webpack.dist.js",
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,7 @@
   },
   "homepage": "https://github.com/bradgarropy/weighter-vue#readme",
   "dependencies": {
+    "express": "^4.16.2",
     "jwt-decode": "^2.2.0",
     "moment": "^2.19.1",
     "vue": "^2.5.2",
