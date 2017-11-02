@@ -29,6 +29,7 @@
     import FormInput from './FormInput.vue';
     import FormTextArea from './FormTextArea.vue';
     import feedback from '../api/feedback';
+    import { userEmail } from '../utils/authentication';
 
     export default {
         components: {
@@ -38,7 +39,7 @@
         data() {
 
             return {
-                email: '',
+                email: userEmail(),
                 feedback: '',
                 errors: {},
             };

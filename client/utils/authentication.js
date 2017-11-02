@@ -61,3 +61,18 @@ export function userFirstName() {
     return user.first_name;
 
 }
+
+
+export function userEmail() {
+
+    const user = userInfo();
+
+    if (!user) {
+
+        return undefined;
+
+    }
+
+    return user.email;
+
+}

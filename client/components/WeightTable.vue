@@ -66,7 +66,7 @@
             trash(id) {
 
                 deleteWeight(id)
-                    .then((response) => {
+                    .then(() => {
 
                         this.refresh();
 
