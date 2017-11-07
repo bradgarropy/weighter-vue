@@ -16,8 +16,22 @@
     "url": "git+https://github.com/bradgarropy/weighter-vue.git"
   },
   "keywords": [
+    "javascript",
+    "node",
+    "nodejs",
+    "express",
+    "expressjs",
+    "web-app",
+    "web-application",
     "vue",
-    "vuejs"
+    "vuejs",
+    "vue-router",
+    "vue-resource",
+    "webpack",
+    "babel",
+    "eslint",
+    "jwt",
+    "jsonwebtoken"
   ],
   "author": "Brad Garropy",
   "license": "ISC",
